@@ -5,7 +5,7 @@ using UnityEngine;
 public enum EnemyType
 {
     Dashing,
-    Ranged,
+    Shooting,
     Count
 }
 
@@ -35,10 +35,10 @@ public class EnemyFactory
                 newMeleeEnemy.SetEnemyValue(enemyValues);
                 enemyController.AddEnemy(newMeleeEnemy);
                 break;
-            case EnemyType.Ranged:
-                RangedEnemy newRangedEnemy = new RangedEnemy();
-                newRangedEnemy.SetEnemyValues(enemyValues);
-                enemyController.AddEnemy(newRangedEnemy);
+            case EnemyType.Shooting:
+                ShootingEnemy newShootingEnemy = new ShootingEnemy();
+                newShootingEnemy.SetEnemyValues(enemyValues);
+                enemyController.AddEnemy(newShootingEnemy);
                 break;
             default:
                 break;

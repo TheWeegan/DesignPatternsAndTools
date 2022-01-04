@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - DashingEnemy
+  - Border
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - RangedEnemy
   - DashingEnemy
   - Projectile
-  - 
+  - Camera
   - 
   - 
   - 

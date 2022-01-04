@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RangedEnemy : EnemyFactory
+public class ShootingEnemy : EnemyFactory
 {
     EnemyValues _enemyValues = new EnemyValues();
     
-   ProjectileValues _projectileValues = new ProjectileValues();
+    ProjectileValues _projectileValues = new ProjectileValues();
 
     EnemyStateHandler _enemyState = new EnemyStateHandler();
     EnemyStateHandler.Event _currentEvent = EnemyStateHandler.Event.NotInRange;

@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour
     int _playerScore = 0;
     float _scoreTimer = 0;
 
+    string _borderTag = "Border";
+
     void Start()
     {
         _scoreTimer = _scoreCooldown;
@@ -32,12 +34,7 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        PlayerDied();
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "DashingEnemy")
+        if (!other.CompareTag(_borderTag))
         {
             PlayerDied();
         }

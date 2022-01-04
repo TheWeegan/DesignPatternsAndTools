@@ -6,7 +6,7 @@ public static class ProjectilePool
 {
     static List<EnemyProjectile> _projectilePool = new List<EnemyProjectile>();
 
-    static Vector2 _poolPosition = new Vector2(0, -8);
+    static Vector2 _poolPosition = new Vector2(0, -100);
 
     public static void CreateProjectiles(uint amount, ProjectileValues projectileValues, GameObject projectileObject)
     {

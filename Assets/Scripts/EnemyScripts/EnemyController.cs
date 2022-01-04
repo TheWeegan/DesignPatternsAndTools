@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] GameObject _player;
     [SerializeField] GameObject _dashingEnemyPrefab;
-    [SerializeField] GameObject _rangedEnemyPrefab;
+    [SerializeField] GameObject _shootingEnemyPrefab;
 
     #region DashingEnemyValues
     [SerializeField] List<Vector2> _dashingEnemyPositions;
@@ -18,19 +18,19 @@ public class EnemyController : MonoBehaviour
     #endregion
 
     #region RangedEnemyValues
-    [SerializeField] List<Vector2> _rangedEnemyPositions;
-    [SerializeField] float _rangedEnemyAttackCooldownTime;
-    [SerializeField] float _rangedEnemyAttackRange;
-    [SerializeField] float _rangedEnemyAttackTravelingDistance;
-    [SerializeField] float _rangedEnemyAttackSpeed;
-    [SerializeField] float _rangedEnemyMovementSpeed;
+    [SerializeField] List<Vector2> _shootingEnemyPositions;
+    [SerializeField] float _shootingEnemyAttackCooldownTime;
+    [SerializeField] float _shootingEnemyAttackRange;
+    [SerializeField] float _shootingEnemyAttackTravelingDistance;
+    [SerializeField] float _shootingEnemyAttackSpeed;
+    [SerializeField] float _shootingEnemyMovementSpeed;
     #endregion
 
     EnemyValues _enemyValues = new EnemyValues();
     EnemyFactory _enemyFactory = new EnemyFactory();
 
     List<DashingEnemy> _dashingEnemies = new List<DashingEnemy>();
-    List<RangedEnemy> _rangedEnemies = new List<RangedEnemy>();
+    List<ShootingEnemy> _shootingEnemies = new List<ShootingEnemy>();
 
     void Start()
     {
@@ -39,24 +39,24 @@ public class EnemyController : MonoBehaviour
 
     void CreateEnemies()
     {
-        CreateMeleeEnemies();
-        CreteRangedEnemies();
+        CreateDashingEnemy();
+        CreteShootingEnemies();
     }
 
     void Update()
     {
-        foreach(DashingEnemy enemyMelee in _dashingEnemies)
+        foreach(DashingEnemy dashingEnemy in _dashingEnemies)
         {
-            enemyMelee.UpdateEnemy();
+            dashingEnemy.UpdateEnemy();
         }
-        foreach (RangedEnemy enemyRanged in _rangedEnemies)
+        foreach (ShootingEnemy shootingEnemy in _shootingEnemies)
         {
-            enemyRanged.UpdateEnemy();
+            shootingEnemy.UpdateEnemy();
         }
     }
 
 
-    void CreateMeleeEnemies()
+    void CreateDashingEnemy()
     {
         for (int i = 0; i < _dashingEnemyPositions.Count; i++)
         {
@@ -76,33 +76,33 @@ public class EnemyController : MonoBehaviour
             _enemyFactory.CreateEnemy(this, EnemyType.Dashing, _enemyValues);
         }
     }
-    void CreteRangedEnemies()
+    void CreteShootingEnemies()
     {
-        for (int i = 0; i < _rangedEnemyPositions.Count; i++)
+        for (int i = 0; i < _shootingEnemyPositions.Count; i++)
         {
-            _enemyValues._gameObject = GameObject.Instantiate(_rangedEnemyPrefab);
-            _enemyValues._gameObject.transform.position = _rangedEnemyPositions[i];
+            _enemyValues._gameObject = GameObject.Instantiate(_shootingEnemyPrefab);
+            _enemyValues._gameObject.transform.position = _shootingEnemyPositions[i];
             _enemyValues._targetGameObject = _player;
 
             _enemyValues._attacking = false;
 
-            _enemyValues._attackRange =_rangedEnemyAttackRange;
-            _enemyValues._attackCooldownTime = _rangedEnemyAttackCooldownTime;
-            _enemyValues._attackTravelingDistance = _rangedEnemyAttackTravelingDistance;
-            _enemyValues._attackSpeed = _rangedEnemyAttackSpeed;
-            _enemyValues._movementSpeed = _rangedEnemyMovementSpeed;
+            _enemyValues._attackRange = _shootingEnemyAttackRange;
+            _enemyValues._attackCooldownTime = _shootingEnemyAttackCooldownTime;
+            _enemyValues._attackTravelingDistance = _shootingEnemyAttackTravelingDistance;
+            _enemyValues._attackSpeed = _shootingEnemyAttackSpeed;
+            _enemyValues._movementSpeed = _shootingEnemyMovementSpeed;
 
             _enemyValues._attackCooldown = 0;
-            _enemyFactory.CreateEnemy(this, EnemyType.Ranged, _enemyValues);
+            _enemyFactory.CreateEnemy(this, EnemyType.Shooting, _enemyValues);
         }
     }
 
-    public void AddEnemy(DashingEnemy  enemyMelee)
+    public void AddEnemy(DashingEnemy dashingEnemy)
     {
-        _dashingEnemies.Add(enemyMelee);
+        _dashingEnemies.Add(dashingEnemy);
     }
-    public void AddEnemy(RangedEnemy enemyRanged)
+    public void AddEnemy(ShootingEnemy shootingEnemy)
     {
-        _rangedEnemies.Add(enemyRanged);
+        _shootingEnemies.Add(shootingEnemy);
     }
 }
